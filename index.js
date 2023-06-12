@@ -1,8 +1,9 @@
-const API_KEY = "3aefc3031e2146bb93c628c08a597912"
+const API_KEY = 
 const recipeListEl = document.getElementById('recipe-list')
 function displayRecipes(recipes){
     recipeListEl.innerHTML = ''
-    //let recipeImageEl
+    
+    
     recipes.forEach((recipe)=>{
         const recipeItemEl = document.createElement('li')
         recipeItemEl.classList.add('recipe-item')
@@ -13,8 +14,19 @@ function displayRecipes(recipes){
         recipeTitleEl = document.createElement('h2')
         recipeTitleEl.innerText = recipe.title
 
+        recipeIngredientsEl = document.createElement('p') 
+        recipeIngredientsEl.innerHTML = `
+            <strong>Ingredient:</strong> ${recipe.extendedIngredients.map((ingredient)=>ingredient.original).join(", ")}
+        `
+        
+        recipeLinkEl =  document.createElement('a')
+        recipeLinkEl.href = recipe.sourceUrl
+        recipeLinkEl.innerText =  'View Recipe'        
+
         recipeItemEl.appendChild(recipeImageEl) 
         recipeItemEl.appendChild(recipeTitleEl) 
+        recipeItemEl.appendChild(recipeIngredientsEl)
+        recipeItemEl.appendChild(recipeLinkEl)
         recipeListEl.appendChild(recipeItemEl) 
     })
 }
